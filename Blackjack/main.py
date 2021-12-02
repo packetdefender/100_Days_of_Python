@@ -3,10 +3,6 @@ import random
 
 print(art.logo)
 
-cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
-user_cards = []
-dealer_cards = []
-
 
 def deal_cards():
     hand = []
@@ -19,48 +15,67 @@ def deal_cards():
 
 
 def calculate_score(hand):
+    if len(hand) == 2 and sum(hand) == 21:
+        return 0
     return sum(hand)
     # return(hand)
 
 
-def check_blackjack(hand):
-    if sum(hand) == 21:
-        return 0
-    else:
-        return hand
-
+cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
+player_cards = []
+dealer_cards = []
 
 game_on = True
 while game_on:
-    user_hand = deal_cards()
+    player_hand = deal_cards()
     dealer_hand = deal_cards()
-    user_score = calculate_score(user_hand)
+    player_score = calculate_score(player_hand)
     dealer_score = calculate_score(dealer_hand)
 
-    print(f"Your cards: {user_hand}, current score {user_score}")
-    print(f"Dealer's first card: {dealer_hand}")
-    user_blackjack = check_blackjack(user_hand)
-    dealer_blackjack = check_blackjack(dealer_hand)
-    print(user_blackjack)
-    print(dealer_blackjack)
-    check_blackjack = True
-
+    print(f"Your cards: {player_hand}, current score {player_score}")
+    print(f"Dealer's first card: {dealer_hand[0]}")
+    player_turn = True
     while player_turn:
-        player_choice = input("Do you want to Hit or Stand: ").upper()
-        if player_choice == "H":
-            user_hand.append(random.choice(cards))
-            user_score = calculate_score(user_hand)
-            print(f"Your cards: {user_hand}, current score {user_score}")
-        else:
-            print(f"Your final hand is {user_hand}, final score {user_score}")
-            print(
-                f"The dealers final hand is {dealer_hand}, final score {dealer_score}")
+        if player_score == 0:
+            print("HERE PS = 0")
             player_turn = False
-    if user_score > dealer_score:
-        print(f"You win with: {user_hand}")
+        elif player_score > 21:
+            print("HERE - P-S > 21")
+            player_turn = False
+        player_choice = input("Do you want to Hit or Stand: ").upper()
+        if player_score < 21:
+            print("Here")
+            if player_choice == "H":
+                player_hand.append(random.choice(cards))
+                player_score = calculate_score(player_hand)
+                print(
+                    f"Your cards: {player_hand}, current score {player_score}")
+            elif player_choice == "S":
+                print("IN S")
+                player_turn = False
+
+    dealer_turn = True
+    while dealer_turn:
+        if sum(dealer_hand) < 16:
+            draw_card = random.choice(cards)
+            dealer_hand.append(draw_card)
+        else:
+            dealer_turn = False
+    print(
+        f"The dealers final hand is {dealer_hand}, final score {dealer_score}")
+    if player_score == 0:
+        print(f"You win with Blackjack! {player_hand}")
+        game_on = False
+    elif player_score > 21:
+        print(f"You lose!")
+        print(
+            f"The dealers final hand is {dealer_hand}, final score {dealer_score}")
+        game_on = False
+    elif player_score > dealer_score:
+        print(f"You win with: {player_hand}")
         game_on = False
     else:
         print(f"You lose!")
         game_on = False
-# print(user_hand)
+# print(player_hand)
 # print(dealer_hand[0])
