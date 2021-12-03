@@ -31,7 +31,6 @@ def player_turn(hand):
         return 0
     while player_turn:
         if 11 in hand and sum(cards) > 21:
-            print("IN HERE")
             hand.remove(11)
             hand.append(1)
         if sum(hand) > 21:
