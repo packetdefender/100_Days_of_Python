@@ -28,14 +28,9 @@ def check_blackjack(hand):
 
 
 def player_turn(hand):
-    player_turn = True
-    while player_turn:
-        if check_blackjack(hand):
-            print("CHECK Blackjack")
-            player_turn = False
-        # elif sum(hand) < 21:
-        #   print("Here")
-        #   Return(hand)
+    if check_blackjack(hand):
+        print("CHECK Blackjack")
+        player_turn = False
         playerchoice = True
         while playerchoice:
             if sum(hand) > 21:
