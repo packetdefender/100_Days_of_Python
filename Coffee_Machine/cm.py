@@ -7,13 +7,13 @@ MENU = {
         "price": 1.50,
     },
     "latte": {
-        "ingredients": {
+      "ingredients": {
             "water": 200,
             "milk": 150,
             "coffee": 24,
 
-        },
-        "price": 2.50,
+      },
+      "price": 2.50,
     },
     "cappuccino": {
         "ingredients": {
