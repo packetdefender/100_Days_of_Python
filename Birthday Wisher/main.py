@@ -5,9 +5,9 @@ from random import choice
 
 BIRTHDAY_CSV = "birthdays.csv"
 PLACEHOLDER = "[NAME]"
-MY_EMAIL = "mikelossmann@gmail.com"
+MY_EMAIL = "xxxxxxxxx"
 SMTP_SERVER = "smtp.gmail.com"
-PASSWORD = "jxegkfkidxwppegc"
+PASSWORD = "jxxxxxxxx"
 SMTP_PORT = 587
 
 data = pd.read_csv(BIRTHDAY_CSV)
